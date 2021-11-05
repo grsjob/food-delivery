@@ -41,6 +41,11 @@ logInForm.addEventListener('submit', (event) => {
 		login: inputLogin.value,
 		password: inputPassword.value
 	}
+	if (user.login === '' || user.password === '') {
+		alert('Введите логин/пароль');
+		modalAuth.style.display = 'none';
+		return;
+	}
 	localStorage.setItem('user', JSON.stringify(user));
 	login(user);
 
