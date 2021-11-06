@@ -1,9 +1,9 @@
 const restourant = 'tanuki';
 
 const renderItems = (date) => {
-
-	console.log(date);
-
+	date.forEach((elem) => {
+		console.log(elem);
+	});
 }
 
 fetch(`./db/${restourant}.json`)

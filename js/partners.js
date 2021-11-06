@@ -1,6 +1,7 @@
 const renderItems = (date) => {
-	console.log(date);
-
+	date.forEach((elem) => {
+		console.log(elem);
+	});
 }
 
 fetch('https://food-delivery-65da2-default-rtdb.firebaseio.com/db/partners.json')
