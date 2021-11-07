@@ -41,9 +41,17 @@ logInForm.addEventListener('submit', (event) => {
 		login: inputLogin.value,
 		password: inputPassword.value
 	}
-	if (user.login === '' || user.password === '') {
-		alert('Введите логин/пароль');
-		modalAuth.style.display = 'none';
+	if (user.login === '') {
+
+		inputLogin.style.borderColor = 'red';
+		inputLogin.placeholder = 'Заполните!!!';
+		inputPassword.style.color = 'red';
+		return;
+	}
+	if (user.password === '') {
+		inputPassword.style.borderColor = 'red';
+		inputPassword.placeholder = 'Заполните!!!';
+		inputPassword.style.color = 'red';
 		return;
 	}
 	localStorage.setItem('user', JSON.stringify(user));
