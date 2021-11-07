@@ -1,21 +1,66 @@
 const menu = () => {
-	const restourant = 'tanuki';
+	const cardsMenu = document.querySelector('.cards-menu');
 
-	const renderItems = (date) => {
-		date.forEach((elem) => {
-			console.log(elem);
+
+	const changeTitle = (restaurant) => {
+		const restaurantTitle = document.querySelector('.restaurant-title');
+		const rating = document.querySelector('.rating');
+		const category = document.querySelector('.category');
+
+		console.log(restaurant);
+
+		restaurantTitle.textContent = restaurant.name;
+		rating.textContent = restaurant.stars;
+		category.textContent = restaurant.kitchen;
+
+	}
+
+	const renderItems = (data) => {
+		data.forEach(({ id, image, description, name, price }) => {
+			const card = document.createElement('div');
+
+			card.classList.add('card');
+			card.innerHTML = `
+				<img src="${image}" alt="${name}" class="card-image" />
+				<div class="card-text">
+					<div class="card-heading">
+						<h3 class="card-title card-title-reg">${name}</h3>
+					</div>
+					<div class="card-info">
+						<div class="ingredients">${description}
+						</div>
+					</div>
+					<div class="card-buttons">
+						<button class="button button-primary button-add-cart">
+							<span class="button-card-text">В корзину</span>
+							<span class="button-cart-svg"></span>
+						</button>
+						<strong class="card-price-bold">${price} ₽</strong>
+					</div>
+				</div>
+			`
+
+			cardsMenu.append(card);
 		});
 	}
 
-	fetch(`./db/${restourant}.json`)
-		.then((Response) => Response.json())
-		.then((date) => {
-			renderItems(date);
-		})
+	if (localStorage.getItem('restaurant')) {
 
-		.catch((error) => {
-			console.log(error);
-		})
+		const restaurant = JSON.parse(localStorage.getItem('restaurant'));
+
+		changeTitle(restaurant);
+
+		fetch(`./db/${restaurant.products}`)
+			.then((Response) => Response.json())
+			.then((data) => {
+				renderItems(data);
+			})
+			.catch((error) => {
+				console.log(error);
+			})
+	} else {
+		window.location.href = "/";
+	}
 }
 
 export default menu;
