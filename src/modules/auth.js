@@ -7,6 +7,7 @@ const auth = () => {
 	const inputPassword = document.getElementById('password');
 	const buttonOut = document.querySelector('.button-out');
 	const userName = document.querySelector('.user-name');
+	const labelAuth = document.querySelector('.label-auth');
 
 
 
