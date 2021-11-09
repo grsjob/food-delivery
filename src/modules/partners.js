@@ -1,5 +1,6 @@
 const partners = () => {
 	const cardRestaurants = document.querySelector('.cards-restaurants');
+	const modalAuth = document.querySelector('.modal-auth');
 
 	const renderItems = (data) => {
 		data.forEach((item) => {
@@ -30,8 +31,12 @@ const partners = () => {
 			`
 			a.addEventListener('click', (e) => {
 				e.preventDefault();
-				localStorage.setItem('restaurant', JSON.stringify(item));
-				window.location.href = '/restaurant.html';
+				if (localStorage.getItem('user')) {
+					localStorage.setItem('restaurant', JSON.stringify(item));
+					window.location.href = '/restaurant.html';
+				} else {
+					modalAuth.style.display = 'flex';
+				}
 			});
 
 			cardRestaurants.append(a);
@@ -46,6 +51,8 @@ const partners = () => {
 		.catch((error) => {
 			console.log(error)
 		})
+
+
 }
 
 export default partners;

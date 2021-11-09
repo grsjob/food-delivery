@@ -7,20 +7,25 @@ const auth = () => {
 	const inputPassword = document.getElementById('password');
 	const buttonOut = document.querySelector('.button-out');
 	const userName = document.querySelector('.user-name');
+	const modalDialogAuth = document.querySelector('.modal-dialog-auth');
 
 	const incorrectInput = () => {
 		const span = document.createElement('span');
 		span.style.color = 'red';
 		span.style.position = 'absolute';
-		span.style.top = '47.5%';
-		span.style.right = '46%';
+		span.style.top = '43%';
+		span.style.right = '25%';
 		span.textContent = 'Некорректный ввод';
-		modalAuth.append(span);
+		modalDialogAuth.append(span);
 
 		inputLogin.addEventListener('click', () => {
 			span.style.display = 'none';
 		})
 		inputPassword.addEventListener('click', () => {
+			span.style.display = 'none';
+		})
+
+		closeAuth.addEventListener('click', () => {
 			span.style.display = 'none';
 		})
 
@@ -40,7 +45,6 @@ const auth = () => {
 		modalAuth.style.display = 'none';
 		userName.textContent = '';
 		localStorage.removeItem('user');
-
 	}
 
 	buttonAuth.addEventListener('click', () => {
@@ -48,6 +52,7 @@ const auth = () => {
 	})
 	closeAuth.addEventListener('click', () => {
 		modalAuth.style.display = 'none';
+
 	})
 
 	logInForm.addEventListener('submit', (event) => {
