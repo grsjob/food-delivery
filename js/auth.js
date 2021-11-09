@@ -6,17 +6,35 @@ const inputLogin = document.getElementById('login');
 const inputPassword = document.getElementById('password');
 const buttonOut = document.querySelector('.button-out');
 const userName = document.querySelector('.user-name');
+const modalBody = document.querySelector('.modal-body');
+const labelAuth = document.querySelector('label-auth');
 
+const incorrectInput = () => {
+	const span = document.createElement('span');
+	span.style.color = 'red';
+	span.style.position = 'absolute';
+	span.style.top = '46%';
+	span.style.right = '45%';
+	span.textContent = 'Некорректный ввод';
+	modalAuth.append(span);
 
+	inputLogin.addEventListener('click', () => {
+		span.style.display = 'none';
+	})
+	inputPassword.addEventListener('click', () => {
+		span.style.display = 'none';
+	})
+
+}
 
 const login = (user) => {
 	buttonAuth.style.display = 'none';
 	buttonOut.style.display = 'flex';
 	userName.style.display = 'flex';
 	modalAuth.style.display = 'none';
-
 	userName.textContent = user.login;
 }
+
 const logout = (user) => {
 	buttonAuth.style.display = 'flex';
 	buttonOut.style.display = 'none';
@@ -41,21 +59,14 @@ logInForm.addEventListener('submit', (event) => {
 		login: inputLogin.value,
 		password: inputPassword.value
 	}
-	if (user.login === '') {
+	if (user.login || user.password) {
+		localStorage.setItem('user', JSON.stringify(user));
+		login(user);
+	} else {
+		incorrectInput();
+		return;
+	}
 
-		inputLogin.style.borderColor = 'red';
-		inputLogin.placeholder = 'Заполните!!!';
-		inputPassword.style.color = 'red';
-		return;
-	}
-	if (user.password === '') {
-		inputPassword.style.borderColor = 'red';
-		inputPassword.placeholder = 'Заполните!!!';
-		inputPassword.style.color = 'red';
-		return;
-	}
-	localStorage.setItem('user', JSON.stringify(user));
-	login(user);
 
 })
 
