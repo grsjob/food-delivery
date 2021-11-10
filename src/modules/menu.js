@@ -7,6 +7,8 @@ const menu = () => {
 		[];
 
 	const addToCart = (cartItem) => {
+		const cartArray = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+
 		if (cartArray.some((item) => item.id === cartItem.id)) {
 			cartArray.map((item => {
 				if (item.id === cartItem.id) {
@@ -17,7 +19,6 @@ const menu = () => {
 		} else {
 			cartArray.push(cartItem);
 		}
-
 
 		localStorage.setItem('cart', JSON.stringify(cartArray));
 	}
