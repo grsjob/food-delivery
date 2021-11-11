@@ -8,6 +8,7 @@ const auth = () => {
 	const buttonOut = document.querySelector('.button-out');
 	const userName = document.querySelector('.user-name');
 	const modalDialogAuth = document.querySelector('.modal-dialog-auth');
+	const buttonCart = document.querySelector('.button-cart');
 
 	const incorrectInput = () => {
 		const span = document.createElement('span');
@@ -33,16 +34,23 @@ const auth = () => {
 
 	const login = (user) => {
 		buttonAuth.style.display = 'none';
+
 		buttonOut.style.display = 'flex';
 		userName.style.display = 'flex';
+		buttonCart.style.display = 'flex';
+
 		modalAuth.style.display = 'none';
 		userName.textContent = user.login;
+
 	}
 	const logout = (user) => {
 		buttonAuth.style.display = 'flex';
+
 		buttonOut.style.display = 'none';
 		userName.style.display = 'none';
 		modalAuth.style.display = 'none';
+		buttonCart.style.display = 'none';
+
 		userName.textContent = '';
 		localStorage.removeItem('user');
 	}
